@@ -1,0 +1,88 @@
+#%RAML 0.8
+  ---
+  title: e-BookMobile API
+  baseUri: http://api.e-bookmobile.com/{version}
+  version: v1
+
+  /users:
+
+    /authors:
+      get:
+      put:
+      post:
+      /{authorName}:
+
+    /books:
+      get:
+        queryParameters:
+          author:
+          publicationYear:
+          rating:
+          isbn:
+      post:
+      put:
+
+      /{bookTitle}:
+        get:
+          description: Retrieve a specific book title
+          responses:
+            200:
+              body:
+                application/json:
+                  example: |
+                    {
+                      'data': {
+                        'id'         : 'sbBGk',
+                        'title'      : 'Stiff: The curious Lives of Human Cadavers',
+                        'description': null,
+                        'datetime'   : 1341533193,
+                        'genre'      : 'science',
+                        'author'     : 'Mary Roach',
+                        'link'       : 'http://e-booksmobile.com/books/Stiff',
+                      },
+                      'success': true,
+                      'status': 200
+                    }
+          queryParameters:
+            author:
+              displayName: Author
+              type: string
+              description: An author's full name
+              example: Mary Roach
+              required: false
+            publicationYear:
+              displayName: Pub Year
+              type: number
+              description: The year released for the first time in the US
+              example: 1984
+              required: false
+            rating:
+              displayName: Rating
+              type: number
+              description: Average rating (1-5) submitted by users
+              example: 3.14
+              required: false
+            isbn:
+              displayName: ISBN
+              type: string
+              minLength: 10
+              example: 9283328390
+        put:
+          queryParameters:
+            accessToken:
+              displayName: Access Token
+              type: string
+              description: Token giving user permission hit endpoint
+              required: true
+        post:
+          queryParameters:
+            accessToken:
+        delete:
+          queryParameters:
+            accessToken:
+
+        /author:
+          get:
+
+        /publisher:
+          get:
